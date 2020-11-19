@@ -1,7 +1,9 @@
 <div class="stock-container">
   <div class="name">{{stock.name + ' (' + stock.code + ')'}}</div>
   <div class="price"
-      [ngStyle]="stockStyles">$ {{stock.price}}</div>
+      [class]="stock.isPositiveChange() ? 'positive':'negative'">
+      $ {{stock.price}}
+  </div>
   <button (click)="toggleFavorite()"
-          [disabled]="stock.favorite">Add to Favorite</button>
+          *ngIf="!stock.favorite">Add to Favorite</button>
 </div>
