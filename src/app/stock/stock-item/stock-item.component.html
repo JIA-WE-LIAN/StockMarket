@@ -2,4 +2,6 @@
   <div class="name">{{name + ' (' + code + ')'}}</div>
   <div class="price"
       [class]="positiveChange ? 'positive' : 'negative'">$ {{price}}</div>
+  <button (click)="toggleFavorite()"
+          [disabled]="favorite">Add to Favorite</button>
 </div>
