@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Stock } from 'src/app/model/stock';
 
 @Component({
@@ -6,23 +6,13 @@ import { Stock } from 'src/app/model/stock';
   templateUrl: './stock-item.component.html',
   styleUrls: ['./stock-item.component.css']
 })
-export class StockItemComponent implements OnInit {
+export class StockItemComponent {
 
-  public stocks: Stock[];
-  public stockStyles: any;
+  @Input() public stock: Stock;
 
   constructor() { }
 
-  ngOnInit(): void {
-    this.stocks = [
-      new Stock('Test Stock Company', 'TSC', 85, 80),
-      new Stock('Second Stock Company', 'SSC', 10, 20),
-      new Stock('Last Stock Company', 'LSC', 876, 765)
-    ];
-  }
-
-  toggleFavorite(event, index) {
-    console.log('toggle Event');
-    this.stocks[index].favorite = !this.stocks[index].favorite;
+  toggleFavorite(event) {
+    this.stock.favorite = !this.stock.favorite;
   }
 }
