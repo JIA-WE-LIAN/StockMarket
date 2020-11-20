@@ -1,8 +1,7 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <app-stock-item [stock]="stockObj"></app-stock-item>
-</div>
-
-
+<h1>
+  {{title}}
+</h1>
+<app-stock-item [stock]="stock"
+                (toggleFavorite)="onToggleFavorite($event)"></app-stock-item>
+<button (click)="changeStockObject()">Change Stock</button>
+<button (click)="changeStockPrice()">Change Price</button>
