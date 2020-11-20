@@ -22,18 +22,10 @@
              (ngModelChange)="setStockPrice($event)">
     </div>
     <div class="stock-exchange">
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="NYSE">NYSE
-      </div>
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="NASDAQ">NASDAQ
-      </div>
-      <div>
-        <input type="radio" name="stockExchange"
-               [(ngModel)]="stock.exchange" value="OTHER">OTHER
-      </div>
+      <select name="stockExchange" [(ngModel)]="stock.exchange">
+        <option *ngFor="let exchange of exchanges"
+          [ngValue]="exchange">{{exchange}}</option>
+      </select>
     </div>
     <div class="stock-confirm">
       <input type="checkbox"
