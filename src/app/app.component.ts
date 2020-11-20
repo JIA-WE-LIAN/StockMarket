@@ -9,13 +9,14 @@ import { Stock } from './model/stock';
 export class AppComponent implements OnInit {
   title = 'Stock Market App';
 
-  public stockObj: Stock;
+  public stock: Stock;
 
   ngOnInit(): void {
-    this.stockObj = new Stock('Test Stock Company', 'TSC', 85, 80);
+    this.stock = new Stock('Test Stock Company', 'TSC', 85, 80);
   }
 
-  testMethod() {
-    console.log('Test method in AppComponent triggered');
+  onToggleFavorite(stock: Stock) {
+    console.log('Favorite for stock ', stock, ' was triggered');
+    this.stock.favorite = !this.stock.favorite;
   }
 }

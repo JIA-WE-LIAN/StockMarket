@@ -9,10 +9,13 @@ import { Stock } from 'src/app/model/stock';
 export class StockItemComponent {
 
   @Input() public stock: Stock;
+  @Output() toggleFavorite: EventEmitter<Stock>;
 
-  constructor() { }
+  constructor() {
+    this.toggleFavorite = new EventEmitter<Stock>();
+   }
 
-  toggleFavorite(event) {
-    this.stock.favorite = !this.stock.favorite;
+  onToggleFavorite(event) {
+    this.toggleFavorite.emit(this.stock);
   }
 }
