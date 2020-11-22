@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Stock } from 'src/app/model/stock';
 
 @Component({
@@ -8,20 +9,10 @@ import { Stock } from 'src/app/model/stock';
 })
 export class CreateStockComponent {
 
-  public stock: Stock;
-  public confirmed = false;
-  public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
-  constructor() {
-    this.stock =  new Stock('', '', 0, 0, 'NASDAQ');
-  }
+  public nameControl = new FormControl();
+  constructor() {}
 
-  createStock(stockForm) {
-    console.log('Stock form', stockForm.value);
-    if (stockForm.valid) {
-      this.stock = stockForm.value.stock;
-      console.log('Creating stock ', this.stock);
-    } else {
-      console.error('Stock form is in an invalid state');
-    }
+  onSubmit() {
+    console.log('Name Control Value', this.nameControl.value);
   }
 }
