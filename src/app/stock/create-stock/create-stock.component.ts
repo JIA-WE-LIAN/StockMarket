@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Stock } from 'src/app/model/stock';
 
+let counter = 1;
+
 @Component({
   selector: 'app-create-stock',
   templateUrl: './create-stock.component.html',
@@ -9,9 +11,11 @@ import { Stock } from 'src/app/model/stock';
 })
 export class CreateStockComponent {
 
+  private stock: Stock;
   public stockForm: FormGroup;
   constructor(private fb: FormBuilder) {
     this.createForm();
+    this.stock = new Stock('Test ' + counter++, 'TST', 20, 10);
   }
 
   createForm() {
@@ -22,7 +26,25 @@ export class CreateStockComponent {
     });
   }
 
+  loadStockFromServer() {
+    this.stock = new Stock('Test ' + counter++, 'TST', 20, 10);
+    const stockFormModel = Object.assign({}, this.stock);
+    delete stockFormModel.previousPrice;
+    delete stockFormModel.favorite;
+    this.stockForm.setValue(stockFormModel);
+  }
+
+  patchStockForm() {
+    this.stock = new Stock(`Test ${counter++}`, 'TST', 20, 10);
+    this.stockForm.patchValue(this.stock);
+  }
+
+  resetForm() {
+    this.stockForm.reset();
+  }
+
   onSubmit() {
-    console.log('Stock Form Value', this.stockForm.value);
+    this.stock = Object.assign({}, this.stockForm.value);
+    console.log('Saving stock', this.stock);
   }
 }
