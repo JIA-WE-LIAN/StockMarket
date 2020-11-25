@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stock } from 'src/app/model/stock';
+import { MessageService } from 'src/app/services/message.service';
 import { StockService } from 'src/app/services/stock.service';
 
 @Component({
@@ -11,10 +12,11 @@ export class CreateStockComponent {
 
   public stock: Stock;
   public confirmed = false;
-  public message = null;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
-  constructor(private stockService: StockService) {
+  constructor(private stockService: StockService,
+              public messageService: MessageService) {
     this.stock =  new Stock('', '', 0, 0, 'NASDAQ');
+    this.messageService.message = 'Component Level: Hello Message Service';
   }
 
   setStockPrice(price) {
@@ -24,12 +26,15 @@ export class CreateStockComponent {
 
   createStock(stockForm) {
     if (stockForm.valid) {
-      const created = this.stockService.createStock(this.stock);
+      let created = this.stockService.createStock(this.stock);
       if (created) {
-        this.message = 'Successfully created stock with stock code: ' + this.stock.code;
+        this.messageService.message =
+            'Successfully created stock with stock code: ' +
+            this.stock.code;
         this.stock =  new Stock('', '', 0, 0, 'NASDAQ');
       } else {
-        this.message = 'Stock with stock code: ' + this.stock.code + ' already exists';
+        this.messageService.message = 'Stock with stock code: ' +
+            this.stock.code + ' already exists';
       }
     } else {
       console.error('Stock form is in an invalid state');

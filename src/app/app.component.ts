@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Stock } from './model/stock';
+import { MessageService } from './services/message.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,9 @@ import { Stock } from './model/stock';
 export class AppComponent implements OnInit {
   title = 'Stock Market App';
 
-  public stock: Stock;
+  constructor(public messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.stock = new Stock('Test Stock Company', 'TSC', 85, 80, 'NASDAQ');
-  }
-
-  onToggleFavorite(stock: Stock) {
-    console.log('Favorite for stock ', stock, ' was triggered');
-    this.stock.favorite = !this.stock.favorite;
+    this.messageService.message = 'Hello Message Service!';
   }
 }
