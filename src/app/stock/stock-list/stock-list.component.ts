@@ -16,8 +16,4 @@ export class StockListComponent implements OnInit {
   ngOnInit() {
     this.stocks$ = this.stockService.getStocks();
   }
-
-  onToggleFavorite(stock: Stock) {
-    this.stockService.toggleFavorite(stock);
-  }
 }
