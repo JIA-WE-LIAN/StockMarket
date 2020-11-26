@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Stock } from '../model/stock';
 
 @Injectable({
@@ -15,21 +16,22 @@ export class StockService {
     ];
    }
 
-  getStocks() : Stock[] {
-    return this.stocks;
+  getStocks(): Observable<Stock[]> {
+    return of(this.stocks);
   }
 
-  createStock(stock: Stock) {
+  createStock(stock: Stock): Observable<any> {
     const foundStock = this.stocks.find(each => each.code === stock.code);
     if (foundStock) {
-      return false;
+      return of({msg: 'Stock with code ' + stock.code + ' already exists'});
     }
     this.stocks.push(stock);
-    return true;
+    return of({msg: 'Stock with code ' + stock.code + ' successfully created'});
   }
 
   toggleFavorite(stock: Stock) {
     const foundStock = this.stocks.find(each => each.code === stock.code);
     foundStock.favorite = !foundStock.favorite;
+    return of(foundStock);
   }
 }
