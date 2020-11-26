@@ -14,6 +14,7 @@ import { UserStoreService } from './services/user-store.service';
 import { StockAppInterceptor } from './services/stock-app.interceptor';
 import { StockDetailsComponent } from './stock/stock-details/stock-details.component';
 import { StockService } from './services/stock.service';
+import { AppRoutingModule } from './app-routes.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { StockService } from './services/stock.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     StockService,
