@@ -14,7 +14,18 @@ export class CreateStockComponent {
   public message = null;
   public exchanges = ['NYSE', 'NASDAQ', 'OTHER'];
   constructor(private stockService: StockService) {
-    this.stock =  new Stock('', '', 0, 0, 'NASDAQ');
+    this.initializeStock();
+  }
+
+  initializeStock() {
+    this.stock =  {
+      name: '',
+      code: '',
+      price: 0,
+      previousPrice: 0,
+      exchange: 'NASDAQ',
+      favorite: false
+    };
   }
 
   setStockPrice(price) {
@@ -24,13 +35,13 @@ export class CreateStockComponent {
 
   createStock(stockForm) {
     if (stockForm.valid) {
-      const created = this.stockService.createStock(this.stock);
-      if (created) {
-        this.message = 'Successfully created stock with stock code: ' + this.stock.code;
-        this.stock =  new Stock('', '', 0, 0, 'NASDAQ');
-      } else {
-        this.message = 'Stock with stock code: ' + this.stock.code + ' already exists';
-      }
+      this.stockService.createStock(this.stock)
+          .subscribe((result: any) => {
+            this.message = result.msg;
+            this.initializeStock();
+          }, (err) => {
+            this.message = err.error.msg;
+          });
     } else {
       console.error('Stock form is in an invalid state');
     }

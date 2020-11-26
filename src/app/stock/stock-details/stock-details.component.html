@@ -4,8 +4,4 @@
   <div class="price"
       [class.positive]="stock.price > stock.previousPrice"
       [class.negative]="stock.price <= stock.previousPrice">$ {{stock.price}}</div>
-  <button (click)="onToggleFavorite($event)"
-          *ngIf="!stock.favorite">Add to Favorite</button>
-  <button (click)="onToggleFavorite($event)"
-          *ngIf="stock.favorite">Remove from Favorite</button>
 </div>
