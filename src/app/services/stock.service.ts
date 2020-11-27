@@ -10,7 +10,7 @@ export class StockService {
 
   constructor(private http: HttpClient, private userStore: UserStoreService) {}
 
-  getStocks() : Observable<Stock[]> {
+  getStocks(): Observable<Stock[]> {
     return this.http.get<Stock[]>('/api/stock');
   }
 
