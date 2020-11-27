@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Stock } from 'src/app/model/stock';
@@ -12,9 +13,12 @@ import { UserStoreService } from '../../services/user-store.service';
 export class StockListComponent implements OnInit {
 
   public stocks$: Observable<Stock[]>;
-  constructor(private stockService: StockService, private userStore: UserStoreService) { }
+  constructor(private stockService: StockService,
+              private userStore: UserStoreService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.queryParamMap.get('page'));
     this.stocks$ = this.stockService.getStocks();
   }
 }
